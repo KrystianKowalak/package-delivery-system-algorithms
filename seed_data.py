@@ -1,13 +1,12 @@
 from hash_table import HashTable
 
-def seed_package_data():
+def seed_package_data(package_data):
     """
     Manually seed the hash table with package data.
 
     Returns:
         HashTable: A hash table populated with package data.
     """
-    package_data = HashTable()
 
     package_data.insert(1,  21.0, "195 W Oakland Ave",                      "Salt Lake City",   "84115", "10:30 AM", "at the hub", None)
     package_data.insert(2,  44.0, "2530 S 500 E",                           "Salt Lake City",   "84106", None,       "at the hub", None)

@@ -83,5 +83,5 @@ class HashTable:
         """
         result = "\nHash Table Contents:\n"
         for i, slot in enumerate(self.table):
-            result += f"Index {i}: {slot}\n"
+            result += f"Index {i:02}: {slot}\n"
         return result
