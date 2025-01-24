@@ -1,7 +1,17 @@
+"""
+hash_table.py
+
+This module implements a HashTable class for storing and managing package data using an efficient hashing mechanism.
+The HashTable provides methods for inserting new data and retrieving existing data based on a unique key.
+To handle potential collisions, the hash table uses chaining, where each slot contains a list to store multiple entries that hash to the same index.
+"""
 class HashTable:
     def __init__(self, size=40):
         """
         Initialize the hash table with a fixed size.
+
+        Args:
+            size (int): The number of slots in the hash table. Default is 40.
         """
         self.size = size
         self.table = [None] * size
@@ -9,6 +19,12 @@ class HashTable:
     def _hash(self, key):
         """
         Generate a hash value for a given key using simple modulus operation.
+
+        Args:
+            key (int): The key to hash.
+
+        Returns:
+            int: The hash value of the key.
         """
         return key % self.size
 
@@ -80,6 +96,9 @@ class HashTable:
     def __str__(self):
         """
         Return a string representation of the hash table for debugging.
+
+        Returns:
+            str: A formatted string representation of the distance table.
         """
         result = "\nHash Table Contents:\n"
         for i, slot in enumerate(self.table):

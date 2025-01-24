@@ -1,4 +1,16 @@
+"""
+menu.py
+
+This module handles the display of menus and user input for navigating the program.
+It contains functions for displaying the main menu and the data menu.
+"""
 def display_main_menu():
+    """
+    Display the main menu and prompt the user for a selection.
+
+    Returns:
+        int: The user's menu selection as an integer.
+    """
     while True:
         print()
         print("******************************")
@@ -23,6 +35,12 @@ def display_main_menu():
             print("Invalid input! Please enter a number between 1 and 5.")
 
 def display_data_menu():
+    """
+    Display the data menu and prompt the user for a selection.
+
+    Returns:
+        int: The user's menu selection as an integer.
+    """
     while True:
         print()
         print("******************************")
