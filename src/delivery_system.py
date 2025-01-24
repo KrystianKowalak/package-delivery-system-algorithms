@@ -1,0 +1,59 @@
+from datetime import datetime, timedelta
+
+class DeliverySystem:
+    def __init__(self, distance_table, package_data):
+        """
+        Initialize the delivery system with the distance table and package data.
+
+        Args:
+            distance_table (DistanceTable): An instance of the DistanceTable class.
+            package_data (HashTable): An instance of the HashTable class containing package information.
+        """
+        self.distance_table = distance_table
+        self.packages = package_data
+        self.trucks = {
+            1: {"route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
+            2: {"route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
+            3: {"route": [], "distance_travled": 0, "departure_time": None}  # Third truck can starts later
+        }
+        self.total_distance = 0
+
+    def find_location(self, location1, location2):
+        """
+        Find the indices of two locations by their names.
+
+        Args:
+            location1 (str): The name of the first location.
+            location2 (str): The name of the second location.
+
+        Returns:
+            tuple: A tuple containing the indices of the two locations.
+        """
+        try:
+            location1_index = self.distance_table.table["locations"].index(location1)
+            location2_index = self.distance_table.table["locations"].index(location2)
+            return location2_index, location1_index
+        except ValueError:
+            raise ValueError("One or both location names not found in the distance table.")
+
+    def calculate_distance(self, location1, location2):
+        """
+        Calculate the distance between two locations using their indices in the distance matrix.
+
+        Args:
+            location1 (int): The index of the first location.
+            location2 (int): The index of the second location.
+
+        Returns:
+            float: The distance between the two locations.
+        """
+        try:
+            return self.distance_table.table["distances"][location1][location2]
+        except IndexError:
+            raise ValueError("Invalid location indices provided.")
+
+    def calculate_travel_time(self, distance):
+        """
+        Calculate travel time given a distance and truck speed (18 mph).
+        """
+        return timedelta(hours=distance / 18)

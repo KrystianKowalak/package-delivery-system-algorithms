@@ -17,9 +17,9 @@ def display_main_menu():
         print("*        |Main  Menu|        *")
         print("******************************")
         print("* 1. Enter Data Menu         *")
-        print("* 2.                         *")
-        print("* 3.                         *")
-        print("* 4.                         *")
+        print("* 2. Enter Algorithm Menu    *")
+        print("* 3. Run Simulation          *")
+        print("* 4. Display Best Solution   *")
         print("* 5. Quit                    *")
         print("******************************")
         
