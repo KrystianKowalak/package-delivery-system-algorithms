@@ -10,7 +10,7 @@ class DeliverySystem:
             package_data (HashTable): An instance of the HashTable class containing package information.
         """
         self.distance_table = distance_table
-        self.packages = package_data
+        self.package_data = package_data
         self.trucks = {
             1: {"route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
             2: {"route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
@@ -57,3 +57,41 @@ class DeliverySystem:
         Calculate travel time given a distance and truck speed (18 mph).
         """
         return timedelta(hours=distance / 18)
+
+    def update_truck_distance(self, truck_id, distance):
+            """
+            Update the total distance traveled by a specific truck.
+
+            Args:
+                truck_id (int): The ID of the truck (1, 2, or 3).
+                distance (float): The distance traveled by the truck.
+            """
+            if truck_id in self.trucks:
+                self.trucks[truck_id]["distance"] = distance
+            else:
+                raise ValueError(f"Truck ID {truck_id} is not valid.")
+
+    def calculate_total_distances_travled(self):
+        """
+        Calculate the total distance traveled by all trucks.
+
+        Returns:
+            float: The total distance traveled by all trucks.
+        """
+        self.total_distance = sum(truck["distance"] for truck in self.trucks.values())
+
+        return self.total_distance
+
+    def __str__(self):
+        """
+        Provide a string representation of the delivery system for debugging.
+
+        Returns:
+            str: A formatted string describing the delivery system's state.
+        """
+        result = "Delivery System State:\n"
+        result += f"Total Distance: {self.total_distance:.2f} miles\n"
+        for truck_id, truck in self.trucks.items():
+            result += (f"Truck {truck_id}: Route = {truck['route']}, Distance = {truck['distance']:.2f} miles, "
+                       f"Departure Time = {truck['departure_time']}\n")
+        return result
