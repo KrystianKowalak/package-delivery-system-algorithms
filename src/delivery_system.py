@@ -12,9 +12,9 @@ class DeliverySystem:
         self.distance_table = distance_table
         self.package_data = package_data
         self.trucks = {
-            1: {"route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
-            2: {"route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
-            3: {"route": [], "distance_travled": 0, "departure_time": None}  # Third truck can starts later
+            1: {"packages": [], "route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
+            2: {"packages": [], "route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
+            3: {"packages": [], "route": [], "distance_travled": 0, "departure_time": None}  # Third truck can starts later
         }
         self.total_distance = 0
 
@@ -56,7 +56,7 @@ class DeliverySystem:
         """
         Calculate travel time given a distance and truck speed (18 mph).
         """
-        return timedelta(hours=distance / 18)
+        return timedelta(hours = distance / 18)
 
     def update_truck_distance(self, truck_id, distance):
             """

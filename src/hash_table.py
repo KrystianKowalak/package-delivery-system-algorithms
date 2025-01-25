@@ -28,19 +28,21 @@ class HashTable:
         """
         return key % self.size
 
-    def insert(self, package_id, weight, address, city, zip_code, deadline, status, special_instructions):
+    def insert(self, package_id, weight, address, city, zip_code, deadline, status, truck_requirment, package_requirment, Package_delay):
         """
         Insert package data into the hash table.
 
         Args:
             package_id (int): Unique package ID (used as the key).
             weight (float): Package weight in kilograms.
-            address (str): Delivery address.
+            address (string): Delivery address.
             city (str): Delivery city.
-            zip_code (str): ZIP code.
-            deadline (str): Delivery deadline.
-            status (str): Delivery status (e.g., "at the hub", "en route", or "delivered"
-            special_instructions (str): Special delivery instructions if any").
+            zip_code (string): ZIP code.
+            deadline (string): Delivery deadline.
+            status (string): Delivery status (e.g., "at the hub", "en route", or "delivered").
+            truck_requirment (int): If a package needs to be on a specific truck for delivery
+            package_requirment (tuple): If a package needs to be along with other packages on the same truck load
+            Package_delay (string): The time a delay package may leave and be out for delivery
         """
         index = self._hash(package_id)
 
@@ -60,7 +62,9 @@ class HashTable:
                     "zip_code": zip_code,
                     "deadline": deadline,
                     "status": status,
-                    "special_instructions": special_instructions
+                    "truck_requirment": truck_requirment,
+                    "package_requirment": package_requirment,
+                    "Package_delay": Package_delay
                 }
                 return
 
@@ -73,7 +77,9 @@ class HashTable:
             "zip_code": zip_code,
             "deadline": deadline,
             "status": status,
-            "special_instructions": special_instructions
+            "truck_requirment": truck_requirment,
+            "package_requirment": package_requirment,
+            "Package_delay": Package_delay
         })
 
     def lookup(self, package_id):

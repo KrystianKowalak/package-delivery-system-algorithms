@@ -15,46 +15,46 @@ def seed_package_data(package_data):
         HashTable: A hash table populated with package data.
     """
 
-    package_data.insert(1,  21.0, "195 W Oakland Ave",                      "Salt Lake City",   "84115", "10:30 AM", "at the hub", None)
-    package_data.insert(2,  44.0, "2530 S 500 E",                           "Salt Lake City",   "84106", None,       "at the hub", None)
-    package_data.insert(3,  2.0,  "233 Canyon Rd",                          "Salt Lake City",   "84103", None,       "at the hub", "Can only be on truck 2")
-    package_data.insert(4,  4.0,  "380 W 2880 S",                           "Salt Lake City",   "84115", None,       "at the hub", None)
-    package_data.insert(5,  5.0,  "410 S State St",                         "Salt Lake City",   "84111", None,       "at the hub", None)
-    package_data.insert(6,  88.0, "3060 Lester St",                         "West Valley City", "84119", "10:30 AM", "at the hub", "Delayed on flight---will not arrive to depot until 9:05 am")
-    package_data.insert(7,  8.0,  "1330 2100 S",                            "Salt Lake City",   "84106", None,       "at the hub", None)
-    package_data.insert(8,  9.0,  "300 State St",                           "Salt Lake City",   "84103", None,       "at the hub", None)
-    package_data.insert(9,  2.0,  "300 State St",                           "Salt Lake City",   "84103", None,       "at the hub", "Wrong address listed, Updated at 10:20am")
-    package_data.insert(10, 1.0,  "600 E 900 South",                        "Salt Lake City",   "84105", None,       "at the hub", None)
-    package_data.insert(11, 1.0,  "2600 Taylorsville Blvd",                 "Salt Lake City",   "84118", None,       "at the hub", None)
-    package_data.insert(12, 1.0,  "3575 W Valley Central Station bus Loop", "West Valley City", "84119", None,       "at the hub", None)
-    package_data.insert(13, 2.0,  "2010 W 500 S",                           "Salt Lake City",   "84104", "10:30 AM", "at the hub", None)
-    package_data.insert(14, 88.0, "4300 S 1300 E",                          "Millcreek",        "84117", "10:30 AM", "at the hub", "Must be delivered with 15, 19")
-    package_data.insert(15, 4.0,  "4580 S 2300 E",                          "Holladay",         "84117", "9:00 AM",  "at the hub", None)
-    package_data.insert(16, 88.0, "4580 S 2300 E",                          "Holladay",         "84117", "10:30 AM", "at the hub", "Must be delivered with 13, 19")
-    package_data.insert(17, 2.0,  "3148 S 1100 W",                          "Salt Lake City",   "84119", None,       "at the hub", None)
-    package_data.insert(18, 6.0,  "1488 4800 S",                            "Salt Lake City",   "84123", None,       "at the hub", "Can only be on truck 2")
-    package_data.insert(19, 37.0, "177 W Price Ave",                        "Salt Lake City",   "84115", None,       "at the hub", None)
-    package_data.insert(20, 37.0, "3595 Main St",                           "Salt Lake City",   "84115", "10:30 AM", "at the hub", "Must be delivered with 13, 15")
-    package_data.insert(21, 3.0,  "3595 Main St",                           "Salt Lake City",   "84115", None,       "at the hub", None)
-    package_data.insert(22, 2.0,  "6351 South 900 East",                    "Murray",           "84121", None,       "at the hub", None)
-    package_data.insert(23, 5.0,  "5100 South 2700 West",                   "Salt Lake City",   "84118", None,       "at the hub", None)
-    package_data.insert(24, 7.0,  "5025 State St",                          "Murray",           "84107", None,       "at the hub", None)
-    package_data.insert(25, 7.0,  "5383 South 900 East #104",               "Salt Lake City",   "84117", "10:30 AM", "at the hub", "Delayed on flight---will not arrive to depot until 9:05 am")
-    package_data.insert(26, 25.0, "5383 South 900 East #104",               "Salt Lake City",   "84117", None,       "at the hub", None)
-    package_data.insert(27, 5.0,  "1060 Dalton Ave S",                      "Salt Lake City",   "84104", None,       "at the hub", None)
-    package_data.insert(28, 7.0,  "2835 Main St",                           "Salt Lake City",   "84115", None,       "at the hub", "Delayed on flight---will not arrive to depot until 9:05 am")
-    package_data.insert(29, 2.0,  "1330 2100 S",                            "Salt Lake City",   "84106", "10:30 AM", "at the hub", None)
-    package_data.insert(30, 1.0,  "300 State St",                           "Salt Lake City",   "84103", "10:30 AM", "at the hub", None)
-    package_data.insert(31, 1.0,  "3365 S 900 W",                           "Salt Lake City",   "84119", "10:30 AM", "at the hub", None)
-    package_data.insert(32, 1.0,  "3365 S 900 W",                           "Salt Lake City",   "84119", None,       "at the hub", "Delayed on flight---will not arrive to depot until 9:05 am")
-    package_data.insert(33, 1.0,  "2530 S 500 E",                           "Salt Lake City",   "84106", None,       "at the hub", None)
-    package_data.insert(34, 2.0,  "4580 S 2300 E",                          "Holladay",         "84117", "10:30 AM", "at the hub", None)
-    package_data.insert(35, 88.0, "1060 Dalton Ave S",                      "Salt Lake City",   "84104", None,       "at the hub", None)
-    package_data.insert(36, 88.0, "2300 Parkway Blvd",                      "West Valley City", "84119", None,       "at the hub", "Can only be on truck 2")
-    package_data.insert(37, 2.0,  "410 S State St",                         "Salt Lake City",   "84111", "10:30 AM", "at the hub", None)
-    package_data.insert(38, 9.0,  "410 S State St",                         "Salt Lake City",   "84111", None,       "at the hub", "Can only be on truck 2")
-    package_data.insert(39, 9.0,  "2010 W 500 S",                           "Salt Lake City",   "84104", None,       "at the hub", None)
-    package_data.insert(40, 45.0, "380 W 2880 S",                           "Salt Lake City",   "84115", "10:30 AM", "at the hub", None)
+    package_data.insert(1,  21.0, "195 W Oakland Ave",              "Salt Lake City",   "84115", "10:30 AM", "at the hub", None, None,     None)
+    package_data.insert(2,  44.0, "2530 S 500 E",                   "Salt Lake City",   "84106", None,       "at the hub", None, None,     None)
+    package_data.insert(3,  2.0,  "233 Canyon Rd",                  "Salt Lake City",   "84103", None,       "at the hub", 2   , None,     None)
+    package_data.insert(4,  4.0,  "380 W 2880 S",                   "Salt Lake City",   "84115", None,       "at the hub", None, None,     None)
+    package_data.insert(5,  5.0,  "410 S State St",                 "Salt Lake City",   "84111", None,       "at the hub", None, None,     None)
+    package_data.insert(6,  88.0, "3060 Lester St",                 "West Valley City", "84119", "10:30 AM", "at the hub", None, None,     "9:05 am")
+    package_data.insert(7,  8.0,  "1330 2100 S",                    "Salt Lake City",   "84106", None,       "at the hub", None, None,     None)
+    package_data.insert(8,  9.0,  "300 State St",                   "Salt Lake City",   "84103", None,       "at the hub", None, None,     None)
+    package_data.insert(9,  2.0,  "410 S State St",                 "Salt Lake City",   "84103", None,       "at the hub", None, None,     "10:20am")
+    package_data.insert(10, 1.0,  "600 E 900 South",                "Salt Lake City",   "84105", None,       "at the hub", None, None,     None)
+    package_data.insert(11, 1.0,  "2600 Taylorsville Blvd",         "Salt Lake City",   "84118", None,       "at the hub", None, None,     None)
+    package_data.insert(12, 1.0,  "3575 W Valley Central Station",  "West Valley City", "84119", None,       "at the hub", None, None,     None)
+    package_data.insert(13, 2.0,  "2010 W 500 S",                   "Salt Lake City",   "84104", "10:30 AM", "at the hub", None, None,     None)
+    package_data.insert(14, 88.0, "4300 S 1300 E",                  "Millcreek",        "84117", "10:30 AM", "at the hub", None, (15, 19), None)
+    package_data.insert(15, 4.0,  "4580 S 2300 E",                  "Holladay",         "84117", "9:00 AM",  "at the hub", None, None,     None)
+    package_data.insert(16, 88.0, "4580 S 2300 E",                  "Holladay",         "84117", "10:30 AM", "at the hub", None, (13, 19), None)
+    package_data.insert(17, 2.0,  "3148 S 1100 W",                  "Salt Lake City",   "84119", None,       "at the hub", None, None,     None)
+    package_data.insert(18, 6.0,  "1488 4800 S",                    "Salt Lake City",   "84123", None,       "at the hub", 2   , None,     None)
+    package_data.insert(19, 37.0, "177 W Price Ave",                "Salt Lake City",   "84115", None,       "at the hub", None, None,     None)
+    package_data.insert(20, 37.0, "3595 Main St",                   "Salt Lake City",   "84115", "10:30 AM", "at the hub", None, (15, 19), None)
+    package_data.insert(21, 3.0,  "3595 Main St",                   "Salt Lake City",   "84115", None,       "at the hub", None, None,     None)
+    package_data.insert(22, 2.0,  "6351 South 900 East",            "Murray",           "84121", None,       "at the hub", None, None,     None)
+    package_data.insert(23, 5.0,  "5100 South 2700 West",           "Salt Lake City",   "84118", None,       "at the hub", None, None,     None)
+    package_data.insert(24, 7.0,  "5025 State St",                  "Murray",           "84107", None,       "at the hub", None, None,     None)
+    package_data.insert(25, 7.0,  "5383 South 900 East #104",       "Salt Lake City",   "84117", "10:30 AM", "at the hub", None, None,     "9:05 am")
+    package_data.insert(26, 25.0, "5383 South 900 East #104",       "Salt Lake City",   "84117", None,       "at the hub", None, None,     None)
+    package_data.insert(27, 5.0,  "1060 Dalton Ave S",              "Salt Lake City",   "84104", None,       "at the hub", None, None,     None)
+    package_data.insert(28, 7.0,  "2835 Main St",                   "Salt Lake City",   "84115", None,       "at the hub", None, None,     "9:05 am")
+    package_data.insert(29, 2.0,  "1330 2100 S",                    "Salt Lake City",   "84106", "10:30 AM", "at the hub", None, None,     None)
+    package_data.insert(30, 1.0,  "300 State St",                   "Salt Lake City",   "84103", "10:30 AM", "at the hub", None, None,     None)
+    package_data.insert(31, 1.0,  "3365 S 900 W",                   "Salt Lake City",   "84119", "10:30 AM", "at the hub", None, None,     None)
+    package_data.insert(32, 1.0,  "3365 S 900 W",                   "Salt Lake City",   "84119", None,       "at the hub", None, None,     "9:05 am")
+    package_data.insert(33, 1.0,  "2530 S 500 E",                   "Salt Lake City",   "84106", None,       "at the hub", None, None,     None)
+    package_data.insert(34, 2.0,  "4580 S 2300 E",                  "Holladay",         "84117", "10:30 AM", "at the hub", None, None,     None)
+    package_data.insert(35, 88.0, "1060 Dalton Ave S",              "Salt Lake City",   "84104", None,       "at the hub", None, None,     None)
+    package_data.insert(36, 88.0, "2300 Parkway Blvd",              "West Valley City", "84119", None,       "at the hub", 2   , None,     None)
+    package_data.insert(37, 2.0,  "410 S State St",                 "Salt Lake City",   "84111", "10:30 AM", "at the hub", None, None,     None)
+    package_data.insert(38, 9.0,  "410 S State St",                 "Salt Lake City",   "84111", None,       "at the hub", 2   , None,     None)
+    package_data.insert(39, 9.0,  "2010 W 500 S",                   "Salt Lake City",   "84104", None,       "at the hub", None, None,     None)
+    package_data.insert(40, 45.0, "380 W 2880 S",                   "Salt Lake City",   "84115", "10:30 AM", "at the hub", None, None,     None)
 
     return package_data
 
@@ -70,33 +70,33 @@ def seed_distance_table_data(distance_table):
     """
     
     distance_table.table["locations"] = [
-        "Western Governors University",
-        "International Peace Gardens",
-        "Sugar House Park",
-        "Taylorsville-Bennion Heritage City Gov Off",
-        "Salt Lake City Division of Health Services",
-        "South Salt Lake Public Works",
-        "Salt Lake City Streets and Sanitation",
-        "Deker Lake",
-        "Salt Lake City Ottinger Hall",
-        "Columbus Library",
-        "Taylorsville City Hall",
-        "South Salt Lake Police",
-        "Council Hall",
-        "Redwood Park",
-        "Salt Lake County Mental Health",
-        "Salt Lake County/United Police Dept",
-        "West Valley Prosecutor",
-        "Housing Auth. of Salt Lake County",
-        "Utah DMV Administrative Office",
-        "Third District Juvenile Court",
-        "Cottonwood Regional Softball Complex",
-        "Holiday City Office",
-        "Murray City Museum",
-        "Valley Regional Softball Complex",
-        "City Center of Rock Springs",
-        "Rice Terrace Pavilion Park",
-        "Wheeler Historic Farm"
+        "Hub",
+        "1060 Dalton Ave S",
+        "1330 2100 S",
+        "1488 4800 S",
+        "177 W Price Ave",
+        "195 W Oakland Ave",
+        "2010 W 500 S",
+        "2300 Parkway Blvd",
+        "233 Canyon Rd",
+        "2530 S 500 E",
+        "2600 Taylorsville Blvd",
+        "2835 Main St",
+        "300 State St",
+        "3060 Lester St",
+        "3148 S 1100 W",
+        "3365 S 900 W",
+        "3575 W Valley Central Station",
+        "3595 Main St",
+        "380 W 2880 S",
+        "410 S State St",
+        "4300 S 1300 E",
+        "4580 S 2300 E",
+        "5025 State St",
+        "5100 South 2700 West",
+        "5383 South 900 East #104",
+        "600 E 900 South",
+        "6351 South 900 East"
     ]
 
     distance_table.table["distances"] = [
