@@ -1,3 +1,10 @@
+"""
+delivery_system.py
+
+This module defines the DeliverySystem class, which manages the core logic
+of the delivery simulation. It handles truck management, package distribution,
+distance calculations, and routing logic for delivery optimization.
+"""
 from datetime import datetime, timedelta
 
 class DeliverySystem:
@@ -81,6 +88,17 @@ class DeliverySystem:
         self.total_distance = sum(truck["distance"] for truck in self.trucks.values())
 
         return self.total_distance
+
+    def view_status(self, package_id):
+        """
+        View the status of a specific package.
+        """
+        package = self.packages.lookup(package_id)
+        if package:
+            status = package["status"]
+            return f"Package {package_id}: Status - {status}"
+        else:
+            return f"Package {package_id} not found."
 
     def divide_packages_into_trucks(self):
         """

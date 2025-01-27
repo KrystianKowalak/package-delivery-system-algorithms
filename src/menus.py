@@ -63,3 +63,33 @@ def display_data_menu():
         except ValueError:
             print()
             print("Invalid input! Please enter a number between 1 and 5.")
+
+def display_algorithms_menu():
+    """
+    Display the algorithm menu and prompt the user for a selection.
+
+    Returns:
+        int: The user's menu selection as an integer.
+    """
+    while True:
+        print()
+        print("******************************")
+        print("*     |Algorithms  Menu|     *")
+        print("******************************")
+        print("* 1. Select NNA              *")
+        print("* 2. Select CWSA             *")
+        print("* 3. Select ACOA             *")
+        print("* 4. Print Select Algorithm  *")
+        print("* 5. Return To Main Menu     *")
+        print("******************************")
+        
+        try:
+            selection = int(input("Selection (1-5): "))
+            if selection in range(1, 6):
+                return selection
+            else:
+                print()
+                print("Invalid selection! Please enter a number between 1 and 5.")
+        except ValueError:
+            print()
+            print("Invalid input! Please enter a number between 1 and 5.")
