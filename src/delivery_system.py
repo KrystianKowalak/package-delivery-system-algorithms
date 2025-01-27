@@ -82,6 +82,91 @@ class DeliverySystem:
 
         return self.total_distance
 
+    def divide_packages_into_trucks(self):
+        """
+        Divide packages into three trucks while respecting constraints.
+        Updates the `self.trucks` attribute directly.
+        """
+        # Track assigned packages to avoid duplicates
+        assigned_packages = set()
+
+        # print("----------------------------------------------------------------------------------------------------")
+        # print(self)
+        # Step 1: Assign packages with truck-specific requirements
+        for i in range(self.package_data.size):
+            slot = self.package_data.table[i]
+            if slot:
+                for package in slot:
+                    if package["truck_requirment"] and package["package_id"] not in assigned_packages:
+                        truck_id = package["truck_requirment"]
+                        if len(self.trucks[truck_id]["packages"]) < 16:
+                            self.trucks[truck_id]["packages"].append(package["package_id"])
+                            assigned_packages.add(package["package_id"])
+
+        # print("----------------------------------------------------------------------------------------------------")
+        # print(self)
+        # Step 2: Assign packages with package dependencies
+        for i in range(self.package_data.size):
+            slot = self.package_data.table[i]
+            if slot:
+                for package in slot:
+                    if package["package_requirment"] and package["package_id"] not in assigned_packages:
+                        # Ensure all dependent packages are assigned together
+                        dependents = list(package["package_requirment"])
+                        dependents.append(package["package_id"])
+                        # Check if any dependent is already assigned
+                        assigned_truck_id = None
+                        for truck_id, truck in self.trucks.items():
+                            if any(dep in truck["packages"] for dep in dependents):
+                                assigned_truck_id = truck_id
+                                break
+
+                        if assigned_truck_id:
+                            # Add all dependents to the same truck
+                            for dep in dependents:
+                                if dep not in assigned_packages and len(self.trucks[assigned_truck_id]["packages"]) < 16:
+                                    self.trucks[assigned_truck_id]["packages"].append(dep)
+                                    assigned_packages.add(dep)
+                        else:
+                            # Find a truck with enough capacity for all dependents
+                            for truck_id, truck in self.trucks.items():
+                                if len(truck["packages"]) + len(dependents) <= 16:
+                                    for dep in dependents:
+                                        if dep not in assigned_packages:
+                                            truck["packages"].append(dep)
+                                            assigned_packages.add(dep)
+                                    break
+
+        # print("----------------------------------------------------------------------------------------------------")
+        # print(self)
+        # Step 3: Assign packages with delays (assign to Truck 3 if unassigned)
+        for i in range(self.package_data.size):
+            slot = self.package_data.table[i]
+            if slot:
+                for package in slot:
+                    if package["Package_delay"] and package["package_id"] not in assigned_packages:
+                        if len(self.trucks[3]["packages"]) < 16:
+                            self.trucks[3]["packages"].append(package["package_id"])
+                            assigned_packages.add(package["package_id"])
+
+        # print("----------------------------------------------------------------------------------------------------")
+        # print(self)
+        # Step 4: Assign remaining packages (prioritize deadlines)
+        for i in range(self.package_data.size):
+            slot = self.package_data.table[i]
+            if slot:
+                for package in slot:
+                    if package["package_id"] not in assigned_packages:
+                        # Assign based on truck capacity
+                        for truck_id, truck in self.trucks.items():
+                            if len(truck["packages"]) < 16:
+                                truck["packages"].append(package["package_id"])
+                                assigned_packages.add(package["package_id"])
+                                break
+        
+        # print("----------------------------------------------------------------------------------------------------")
+        # print(self)
+
     def __str__(self):
         """
         Provide a string representation of the delivery system for debugging.
@@ -89,9 +174,22 @@ class DeliverySystem:
         Returns:
             str: A formatted string describing the delivery system's state.
         """
-        result = "Delivery System State:\n"
+        result = "\nDelivery System State:\n"
         result += f"Total Distance: {self.total_distance:.2f} miles\n"
+        
         for truck_id, truck in self.trucks.items():
-            result += (f"Truck {truck_id}: Route = {truck['route']}, Distance = {truck['distance']:.2f} miles, "
-                       f"Departure Time = {truck['departure_time']}\n")
+            # Format packages and route lists with fixed width of 16
+            if truck["packages"]:
+                packages_str = f"{str(truck['packages'])+ ',':<64}"
+            else:
+                packages_str = f"{str(truck['packages'])+ ','}"
+            if truck["route"]:
+                route_str = f"{str(truck['route'])+ ',':<64}"
+            else:
+                route_str = f"{str(truck['route'])+ ','}"
+            
+            result += (f"Truck {truck_id}: Packages = {packages_str} Route = {route_str} "
+                    f"Distance Traveled = {truck['distance_travled']:.2f} miles, "
+                    f"Departure Time = {truck['departure_time']}\n")
+        
         return result

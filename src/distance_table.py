@@ -31,7 +31,7 @@ class DistanceTable:
 
         result += "\nDistances:\n"
         for i, row in enumerate(self.table["distances"]):
-            row_str = ', '.join([str(cell) if cell is not None else 'None' for cell in row])
+            row_str = ", ".join([str(cell) if cell is not None else "None" for cell in row])
             result += f"Row {i + 1:02}: [{row_str}]\n"
 
         return result

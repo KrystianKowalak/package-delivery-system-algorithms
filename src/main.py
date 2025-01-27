@@ -21,18 +21,18 @@ def main():
                             print(delivery_system.package_data)
                             input("Press Enter to continue... ")
                         case 2:
-                            delivery_system.package_data = seed_package_data(delivery_system.package_data)
-                            print()
-                            print("Seeding hash table complete!")
-                            print()
-                            input("Press Enter to continue... ")
-                        case 3:
                             print(delivery_system.distance_table)
                             input("Press Enter to continue... ")
+                        case 3:
+                            print(delivery_system)
+                            input("Press Enter to continue... ")
                         case 4:
+                            delivery_system.package_data = seed_package_data(delivery_system.package_data)
                             delivery_system.distance_table = seed_distance_table_data(delivery_system.distance_table)
+                            delivery_system.divide_packages_into_trucks()
                             print()
-                            print("Seeding distance table complete!")
+                            print("Seeding data complete!")
+                            print("Packages assigned to trucks!")
                             print()
                             input("Press Enter to continue... ")
                         case 5:

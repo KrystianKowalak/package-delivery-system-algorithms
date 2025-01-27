@@ -47,9 +47,9 @@ def display_data_menu():
         print("*        |Data  Menu|        *")
         print("******************************")
         print("* 1. Display Hash Table      *")
-        print("* 2. Seed Hash Table Data    *")
-        print("* 3. Display Distance Matrix *")
-        print("* 4. Seed Distance Matrix    *")
+        print("* 2. Display Distance Matrix *")
+        print("* 3. Display Delivery System *")
+        print("* 4. Seed Data & Load Trucks *")
         print("* 5. Return To Main Menu     *")
         print("******************************")
         
