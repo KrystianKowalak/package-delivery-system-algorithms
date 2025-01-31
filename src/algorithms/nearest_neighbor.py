@@ -42,6 +42,8 @@ class NNA:
                     else:
                         standard_packages.append(package_id)
 
+            # Other trucks dont need prioritization as all packages meet deadlines and this allows them to finish quicker
+            # Allowing truck 3 to start earlier
             if truck_id != 3:
                 standard_packages = truck["packages"].copy()
 
