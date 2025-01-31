@@ -17,7 +17,7 @@ def display_main_menu():
         print("*        |Main  Menu|        *")
         print("******************************")
         print("* 1. Enter Data Menu         *")
-        print("* 2. Enter Algorithm Menu    *")
+        print("* 2. Enter Algorithms Menu   *")
         print("* 3. Run Simulation          *")
         print("* 4. Display Best Solution   *")
         print("* 5. Quit                    *")
@@ -79,7 +79,7 @@ def display_algorithms_menu():
         print("* 1. Select NNA              *")
         print("* 2. Select CWSA             *")
         print("* 3. Select ACOA             *")
-        print("* 4. Print Select Algorithm  *")
+        print("* 4. Print Chosen Algorithm  *")
         print("* 5. Return To Main Menu     *")
         print("******************************")
         

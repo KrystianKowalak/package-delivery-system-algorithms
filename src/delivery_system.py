@@ -19,27 +19,25 @@ class DeliverySystem:
         self.distance_table = distance_table
         self.package_data = package_data
         self.trucks = {
-            1: {"packages": [], "route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
-            2: {"packages": [], "route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0)},
-            3: {"packages": [], "route": [], "distance_travled": 0, "departure_time": None}  # Third truck can starts later
+            1: {"packages": [], "route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0), "current_time": datetime(2023, 1, 1, 8, 0)},
+            2: {"packages": [], "route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0), "current_time": datetime(2023, 1, 1, 8, 0)},
+            3: {"packages": [], "route": [], "distance_travled": 0, "departure_time": datetime(2023, 1, 1, 8, 0), "current_time": datetime(2023, 1, 1, 8, 0)}  # Third truck starts later
         }
         self.total_distance = 0
 
-    def find_location(self, location1, location2):
+    def find_location(self, location):
         """
-        Find the indices of two locations by their names.
+        Find the index of a location by their names.
 
         Args:
             location1 (str): The name of the first location.
-            location2 (str): The name of the second location.
 
         Returns:
             tuple: A tuple containing the indices of the two locations.
         """
         try:
-            location1_index = self.distance_table.table["locations"].index(location1)
-            location2_index = self.distance_table.table["locations"].index(location2)
-            return location2_index, location1_index
+            location_index = self.distance_table.table["locations"].index(location)
+            return location_index
         except ValueError:
             raise ValueError("One or both location names not found in the distance table.")
 
@@ -65,19 +63,6 @@ class DeliverySystem:
         """
         return timedelta(hours = distance / 18)
 
-    def update_truck_distance(self, truck_id, distance):
-            """
-            Update the total distance traveled by a specific truck.
-
-            Args:
-                truck_id (int): The ID of the truck (1, 2, or 3).
-                distance (float): The distance traveled by the truck.
-            """
-            if truck_id in self.trucks:
-                self.trucks[truck_id]["distance"] = distance
-            else:
-                raise ValueError(f"Truck ID {truck_id} is not valid.")
-
     def calculate_total_distances_travled(self):
         """
         Calculate the total distance traveled by all trucks.
@@ -85,9 +70,20 @@ class DeliverySystem:
         Returns:
             float: The total distance traveled by all trucks.
         """
-        self.total_distance = sum(truck["distance"] for truck in self.trucks.values())
+        self.total_distance = sum(truck["distance_travled"] for truck in self.trucks.values())
 
         return self.total_distance
+    
+    def update_trucks_packages_status(self, truck_id):
+        """
+        Updates the status of all packages inside a truck to "En Route".
+
+        Args:
+            truck_id (int): The ID of the truck whose packages need updating.
+        """
+        for package_id in self.trucks[truck_id]["packages"]:
+            package = self.package_data.lookup(package_id)
+            package["status"] = "En Route"
 
     def view_status(self, package_id):
         """
@@ -108,8 +104,6 @@ class DeliverySystem:
         # Track assigned packages to avoid duplicates
         assigned_packages = set()
 
-        # print("----------------------------------------------------------------------------------------------------")
-        # print(self)
         # Step 1: Assign packages with truck-specific requirements
         for i in range(self.package_data.size):
             slot = self.package_data.table[i]
@@ -121,8 +115,6 @@ class DeliverySystem:
                             self.trucks[truck_id]["packages"].append(package["package_id"])
                             assigned_packages.add(package["package_id"])
 
-        # print("----------------------------------------------------------------------------------------------------")
-        # print(self)
         # Step 2: Assign packages with package dependencies
         for i in range(self.package_data.size):
             slot = self.package_data.table[i]
@@ -155,20 +147,16 @@ class DeliverySystem:
                                             assigned_packages.add(dep)
                                     break
 
-        # print("----------------------------------------------------------------------------------------------------")
-        # print(self)
         # Step 3: Assign packages with delays (assign to Truck 3 if unassigned)
         for i in range(self.package_data.size):
             slot = self.package_data.table[i]
             if slot:
                 for package in slot:
-                    if package["Package_delay"] and package["package_id"] not in assigned_packages:
+                    if package["package_delay"] and package["package_id"] not in assigned_packages:
                         if len(self.trucks[3]["packages"]) < 16:
                             self.trucks[3]["packages"].append(package["package_id"])
                             assigned_packages.add(package["package_id"])
 
-        # print("----------------------------------------------------------------------------------------------------")
-        # print(self)
         # Step 4: Assign remaining packages (prioritize deadlines)
         for i in range(self.package_data.size):
             slot = self.package_data.table[i]
@@ -181,9 +169,6 @@ class DeliverySystem:
                                 truck["packages"].append(package["package_id"])
                                 assigned_packages.add(package["package_id"])
                                 break
-        
-        # print("----------------------------------------------------------------------------------------------------")
-        # print(self)
 
     def __str__(self):
         """
@@ -207,7 +192,8 @@ class DeliverySystem:
                 route_str = f"{str(truck['route'])+ ','}"
             
             result += (f"Truck {truck_id}: Packages = {packages_str} Route = {route_str} "
-                    f"Distance Traveled = {truck['distance_travled']:.2f} miles, "
-                    f"Departure Time = {truck['departure_time']}\n")
+                       f"Distance Traveled = {truck['distance_travled']:.2f} miles, "
+                       f"Departure Time = {truck['departure_time']}, "
+                       f"Current Time = {truck['current_time']}\n")
         
         return result

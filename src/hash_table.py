@@ -28,7 +28,7 @@ class HashTable:
         """
         return key % self.size
 
-    def insert(self, package_id, weight, address, city, zip_code, deadline, status, truck_requirment, package_requirment, Package_delay):
+    def insert(self, package_id, weight, address, city, zip_code, deadline, status, truck_requirment, package_requirment, package_delay):
         """
         Insert package data into the hash table.
 
@@ -42,7 +42,7 @@ class HashTable:
             status (string): Delivery status (e.g., "at the hub", "en route", or "delivered").
             truck_requirment (int): If a package needs to be on a specific truck for delivery
             package_requirment (tuple): If a package needs to be along with other packages on the same truck load
-            Package_delay (string): The time a delay package may leave and be out for delivery
+            package_delay (string): The time a delay package may leave and be out for delivery
         """
         index = self._hash(package_id)
 
@@ -64,7 +64,7 @@ class HashTable:
                     "status": status,
                     "truck_requirment": truck_requirment,
                     "package_requirment": package_requirment,
-                    "Package_delay": Package_delay
+                    "package_delay": package_delay
                 }
                 return
 
@@ -79,7 +79,7 @@ class HashTable:
             "status": status,
             "truck_requirment": truck_requirment,
             "package_requirment": package_requirment,
-            "Package_delay": Package_delay
+            "package_delay": package_delay
         })
 
     def lookup(self, package_id):
