@@ -101,74 +101,72 @@ class DeliverySystem:
         Divide packages into three trucks while respecting constraints.
         Updates the `self.trucks` attribute directly.
         """
-        # Track assigned packages to avoid duplicates
-        assigned_packages = set()
+        # Track unassigned packages
+        truck_required_packages = []
+        delayed_packages = []
+        grouped_packages = []
+        deadline_packages = []
+        non_deadline_packages = []
 
-        # Step 1: Assign packages with truck-specific requirements
+        # Assign packages to correct sets
         for i in range(self.package_data.size):
             slot = self.package_data.table[i]
             if slot:
                 for package in slot:
-                    if package["truck_requirment"] and package["package_id"] not in assigned_packages:
-                        truck_id = package["truck_requirment"]
-                        if len(self.trucks[truck_id]["packages"]) < 16:
-                            self.trucks[truck_id]["packages"].append(package["package_id"])
-                            assigned_packages.add(package["package_id"])
+                    if package["truck_requirment"]:
+                        truck_required_packages.append((package["package_id"], package["truck_requirment"]))
+                    elif package["package_delay"]:
+                        delayed_packages.append(package["package_id"])
+                    elif package["package_requirment"]:
+                        grouped_packages.append([package["package_id"]] + list(package["package_requirment"]))
+                    elif package["deadline"]:
+                        deadline_packages.append(package["package_id"])
+                    else:
+                        non_deadline_packages.append(package["package_id"])
 
-        # Step 2: Assign packages with package dependencies
-        for i in range(self.package_data.size):
-            slot = self.package_data.table[i]
-            if slot:
-                for package in slot:
-                    if package["package_requirment"] and package["package_id"] not in assigned_packages:
-                        # Ensure all dependent packages are assigned together
-                        dependents = list(package["package_requirment"])
-                        dependents.append(package["package_id"])
-                        # Check if any dependent is already assigned
-                        assigned_truck_id = None
-                        for truck_id, truck in self.trucks.items():
-                            if any(dep in truck["packages"] for dep in dependents):
-                                assigned_truck_id = truck_id
-                                break
+        # Assign packages with truck-specific requirements
+        for package_id, truck_id in truck_required_packages:
+            self.trucks[truck_id]["packages"].append(package_id)
 
-                        if assigned_truck_id:
-                            # Add all dependents to the same truck
-                            for dep in dependents:
-                                if dep not in assigned_packages and len(self.trucks[assigned_truck_id]["packages"]) < 16:
-                                    self.trucks[assigned_truck_id]["packages"].append(dep)
-                                    assigned_packages.add(dep)
-                        else:
-                            # Find a truck with enough capacity for all dependents
-                            for truck_id, truck in self.trucks.items():
-                                if len(truck["packages"]) + len(dependents) <= 16:
-                                    for dep in dependents:
-                                        if dep not in assigned_packages:
-                                            truck["packages"].append(dep)
-                                            assigned_packages.add(dep)
-                                    break
+        # Assign packages with delays (assign to Truck 3)
+        for package_id in delayed_packages:
+            self.trucks[3]["packages"].append(package_id)
 
-        # Step 3: Assign packages with delays (assign to Truck 3 if unassigned)
-        for i in range(self.package_data.size):
-            slot = self.package_data.table[i]
-            if slot:
-                for package in slot:
-                    if package["package_delay"] and package["package_id"] not in assigned_packages:
-                        if len(self.trucks[3]["packages"]) < 16:
-                            self.trucks[3]["packages"].append(package["package_id"])
-                            assigned_packages.add(package["package_id"])
+        # Assign packages with package dependencies
+        for grouped_package_list in grouped_packages:
+            assigned_truck_id = None
 
-        # Step 4: Assign remaining packages (prioritize deadlines)
-        for i in range(self.package_data.size):
-            slot = self.package_data.table[i]
-            if slot:
-                for package in slot:
-                    if package["package_id"] not in assigned_packages:
-                        # Assign based on truck capacity
-                        for truck_id, truck in self.trucks.items():
-                            if len(truck["packages"]) < 16:
-                                truck["packages"].append(package["package_id"])
-                                assigned_packages.add(package["package_id"])
-                                break
+            # Check if any package in the group is already assigned to a truck
+            for truck_id, truck in self.trucks.items():
+                if any(package_id in truck["packages"] for package_id in grouped_package_list):
+                    assigned_truck_id = truck_id
+                    break
+
+            # If a truck is found, add all packages to the same truck
+            if assigned_truck_id:
+                for package_id in grouped_package_list:
+                    if package_id not in self.trucks[assigned_truck_id]["packages"]:
+                        self.trucks[assigned_truck_id]["packages"].append(package_id)
+            else:
+            # Find a truck with enough capacity for all dependents
+                for truck_id, truck in self.trucks.items():
+                    if len(truck["packages"]) + len(grouped_package_list) <= 16:
+                        self.trucks[truck_id]["packages"].extend(grouped_package_list)
+                        break
+
+        # Assign packages with deadlines
+        for package_id in deadline_packages:
+            for truck_id, truck in self.trucks.items():
+                if len(truck["packages"]) < 16:
+                    truck["packages"].append(package_id)
+                    break
+
+        # Assign remaining packages
+        for package_id in non_deadline_packages:
+            for truck_id, truck in self.trucks.items():
+                if len(truck["packages"]) < 16:
+                    truck["packages"].append(package_id)
+                    break
 
     def __str__(self):
         """
