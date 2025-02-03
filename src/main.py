@@ -16,7 +16,7 @@ from menus import *
 
 
 def main():
-    delivery_system = DeliverySystem(DistanceTable(), HashTable())
+    delivery_system = DeliverySystem(DistanceTable(27), HashTable(40))
     data_seeded = False
     selected_algorithm = ""
     algorithm = None
@@ -63,9 +63,9 @@ def main():
                             print(f"\n{selected_algorithm} is now marked as selected.\n")
                             input("Press Enter to continue... ")
                         case 2:
-                            print("Work in progress!")
+                            print("\nWork in progress!")
                         case 3:
-                            print("Work in progress!")
+                            print("\nWork in progress!")
                         case 4:
                             print(f"\nCurrently the selected algorithm is: {selected_algorithm}\n")
                             input("Press Enter to continue... ")

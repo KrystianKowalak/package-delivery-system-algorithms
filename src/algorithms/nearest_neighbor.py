@@ -2,14 +2,18 @@
 nearest_neighbor.py
 
 This module implements the Nearest Neighbor Algorithm (NNA) for routing and delivery optimization.
-The NNA is a greedy algorithm that assigns delivery routes for trucks by always selecting the 
-closest unvisited location until all packages assigned to the truck are delivered. After completing
-deliveries, the truck returns to the hub.
+The class provides initialization, method to run the algorithm, and a readable string representation
+
+The NNA is a greedy algorithm that assigns delivery routes for trucks by always selecting the nearest location.
+This happens until all packages assigned to the truck are done and delivered.
+After completing deliveries, the truck returns to the hub.
 
 Limitations:
 - This is a greedy algorithm and does not guarantee the optimal solution.
 - It only considers the shortest distance at each step without evaluating global efficiency.
 """
+from datetime import timedelta
+
 class NNA:
     def __init__(self, delivery_system):
         """
@@ -29,7 +33,6 @@ class NNA:
             standard_packages = []
             current_location = "Hub"
             truck["route"] = [current_location]
-            self.delivery_system.update_trucks_packages_status(truck_id)
 
             if truck_id == 3:
                 truck["departure_time"] = min(self.delivery_system.trucks[1]["current_time"], self.delivery_system.trucks[2]["current_time"])
@@ -56,9 +59,9 @@ class NNA:
                         package = self.delivery_system.package_data.lookup(package_id)
                         if package:
                             package_desitnation = package["address"]
-                            current_index = self.delivery_system.find_location(current_location)
-                            destination_index = self.delivery_system.find_location(package_desitnation)
-                            distance = self.delivery_system.calculate_distance(current_index, destination_index)
+                            current_index = self.delivery_system.distance_table.find_location(current_location)
+                            destination_index = self.delivery_system.distance_table.find_location(package_desitnation)
+                            distance = self.delivery_system.distance_table.calculate_distance(current_index, destination_index)
                             if distance < closest_distance:
                                 closest_distance = distance
                                 closest_package = package
@@ -67,14 +70,15 @@ class NNA:
                     if closest_package:
                         truck["route"].append(str(closest_package["package_id"]) + ": " + closest_package["address"])
                         truck["current_time"] += self.delivery_system.calculate_travel_time(closest_distance)
-                        closest_package["status"] = "Delivered: " + str(truck["current_time"])
+                        closest_package["status"] = "Delivered"
+                        closest_package["delivery_time"] = truck["current_time"].time()
                         package_list.remove(closest_package["package_id"])
                         current_location = closest_package["address"]
                         truck["distance_travled"] += closest_distance
 
             # Return to the hub
-            current_index = self.delivery_system.find_location(current_location)
-            distance_to_hub = self.delivery_system.calculate_distance(current_index, 0)
+            current_index = self.delivery_system.distance_table.find_location(current_location)
+            distance_to_hub = self.delivery_system.distance_table.calculate_distance(current_index, 0)
             truck["route"].append("Hub")
             truck["distance_travled"] += distance_to_hub
 

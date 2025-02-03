@@ -2,7 +2,7 @@
 menu.py
 
 This module handles the display of menus and user input for navigating the program.
-It contains functions for displaying the main menu and the data menu.
+It contains functions for displaying the multiple menus of the program.
 """
 def display_main_menu():
     """
@@ -28,11 +28,11 @@ def display_main_menu():
             if selection in range(1, 6):
                 return selection
             else:
-                print()
-                print("Invalid selection! Please enter a number between 1 and 5.")
+                print("\nInvalid selection!")
+                print("Please enter a number between 1 and 5.")
         except ValueError:
-            print()
-            print("Invalid input! Please enter a number between 1 and 5.")
+            print("\nInvalid input!")
+            print("Please enter a number between 1 and 5.")
 
 def display_data_menu():
     """
@@ -47,7 +47,7 @@ def display_data_menu():
         print("*        |Data  Menu|        *")
         print("******************************")
         print("* 1. Display Hash Table      *")
-        print("* 2. Display Distance Matrix *")
+        print("* 2. Display Distance Table  *")
         print("* 3. Display Delivery System *")
         print("* 4. Seed Data & Load Trucks *")
         print("* 5. Return To Main Menu     *")
@@ -58,11 +58,11 @@ def display_data_menu():
             if selection in range(1, 6):
                 return selection
             else:
-                print()
-                print("Invalid selection! Please enter a number between 1 and 5.")
+                print("\nInvalid selection!")
+                print("Please enter a number between 1 and 5.")
         except ValueError:
-            print()
-            print("Invalid input! Please enter a number between 1 and 5.")
+            print("\nInvalid input!")
+            print("Please enter a number between 1 and 5.")
 
 def display_algorithms_menu():
     """
@@ -88,8 +88,8 @@ def display_algorithms_menu():
             if selection in range(1, 6):
                 return selection
             else:
-                print()
-                print("Invalid selection! Please enter a number between 1 and 5.")
+                print("\nInvalid selection!")
+                print("Please enter a number between 1 and 5.")
         except ValueError:
-            print()
-            print("Invalid input! Please enter a number between 1 and 5.")
+            print("\nInvalid input!")
+            print("Please enter a number between 1 and 5.")
