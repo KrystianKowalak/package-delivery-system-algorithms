@@ -95,8 +95,7 @@ def main():
                     print(f"\nData has not been seeded!")
                     print("Please seed the data first.")
             case 4:
-                print(algorithm.delivery_system)
-                print(algorithm.delivery_system.package_data)
+                print(algorithm)
                 input("Press Enter to continue... ")
             case 5:
                 print(f"\nPrograming closing... ")

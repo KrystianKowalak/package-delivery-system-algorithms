@@ -23,7 +23,7 @@ def seed_package_data(package_data):
     package_data.insert(6,  88.0, "3060 Lester St",                 "West Valley City", "84119", "At The Hub", None, "10:30 AM", None, None,     "9:05 am")
     package_data.insert(7,  8.0,  "1330 2100 S",                    "Salt Lake City",   "84106", "At The Hub", None, None,       None, None,     None)
     package_data.insert(8,  9.0,  "300 State St",                   "Salt Lake City",   "84103", "At The Hub", None, None,       None, None,     None)
-    package_data.insert(9,  2.0,  "410 S State St",                 "Salt Lake City",   "84103", "At The Hub", None, None,       None, None,     "10:20 am")
+    package_data.insert(9,  2.0,  "410 S State St",                 "Salt Lake City",   "84111", "At The Hub", None, None,       None, None,     "10:20 am")
     package_data.insert(10, 1.0,  "600 E 900 South",                "Salt Lake City",   "84105", "At The Hub", None, None,       None, None,     None)
     package_data.insert(11, 1.0,  "2600 Taylorsville Blvd",         "Salt Lake City",   "84118", "At The Hub", None, None,       None, None,     None)
     package_data.insert(12, 1.0,  "3575 W Valley Central Station",  "West Valley City", "84119", "At The Hub", None, None,       None, None,     None)

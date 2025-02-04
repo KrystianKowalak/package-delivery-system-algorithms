@@ -2,10 +2,11 @@
 delivery_system.py
 
 This module defines the DeliverySystem class, which manages the core logic of the delivery simulation.
-It containts methods for calculating the travle time, updating the total distance, and updating status of all packages in a truck
+It containts methods for calculating the travle time and updating the total distance.
 The class also provides initialization and a readable string representation.
 """
 from datetime import datetime, timedelta
+import textwrap
 
 class DeliverySystem:
     def __init__(self, distance_table, package_data):
@@ -41,17 +42,6 @@ class DeliverySystem:
         self.total_distance = sum(truck["distance_travled"] for truck in self.trucks.values())
 
         return self.total_distance
-    
-    def update_trucks_packages_status(self, truck_id):
-        """
-        Updates the status of all packages inside a truck to "En Route".
-
-        Args:
-            truck_id (int): The ID of the truck whose packages need updating.
-        """
-        for package_id in self.trucks[truck_id]["packages"]:
-            package = self.package_data.lookup(package_id)
-            package["status"] = "En Route"
 
     def divide_packages_into_trucks(self):
         """
@@ -127,28 +117,23 @@ class DeliverySystem:
 
     def __str__(self):
         """
-        Provide a string representation of the delivery system for debugging.
+        Provide a formatted string representation of the delivery system.
 
         Returns:
             str: A formatted string describing the delivery system's state.
         """
         result = "\nDelivery System:\n"
-
-        result += f"\nTotal Distance: {self.total_distance:.2f} miles\n"
+        result += f"Total Distance: {self.total_distance:.2f} miles\n"
         for truck_id, truck in self.trucks.items():
-            # Format packages and route lists with fixed width of 16
             if truck["packages"]:
-                packages_str = f"{str(truck['packages'])+ ',':<64}"
+                packages_str = f"{str(truck['packages']) + ', ':<64}"
             else:
-                packages_str = f"{str(truck['packages'])+ ','}"
-            if truck["route"]:
-                route_str = f"{str(truck['route'])+ ',':<64}"
-            else:
-                route_str = f"{str(truck['route'])+ ','}"
-            
-            result += (f"Truck {truck_id}: Packages: {packages_str} Route: {route_str} "
-                       f"Distance Traveled: {truck['distance_travled']:.2f} miles, "
-                       f"Departure Time: {truck['departure_time']}, "
-                       f"Current Time: {truck['current_time']}\n")
-        
+                packages_str = f"{str(truck['packages']) + ', '}"
+            result += (f"Truck {truck_id}: Packages: {packages_str}"
+                    f"Distance Traveled: {truck['distance_travled']:.2f} miles, "
+                    f"Departure Time: {truck['departure_time']}, "
+                    f"Current Time: {truck['current_time']}\n")
+            wrapped_route = textwrap.fill(" -> ".join(truck["route"]), width = 169, subsequent_indent = "         ")
+            result += f"         Route: {wrapped_route}\n"
+
         return result

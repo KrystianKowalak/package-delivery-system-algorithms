@@ -6,7 +6,7 @@ The table stores distances and location names, supporting initialization and rea
 Methods for finding a locations index and getting a distance from the matrix are also provided.
 """
 class DistanceTable:
-    def __init__(self, size=50):
+    def __init__(self, size = 50):
         """
         Initialize a null distance table with locations and distances.
 

@@ -6,7 +6,7 @@ The HashTable class provides initialization, readable string representation, a h
 To handle potential collisions, the hash table uses chaining, where each slot contains a list to store multiple entries that hash to the same index.
 """
 class HashTable:
-    def __init__(self, size=50):
+    def __init__(self, size = 50):
         """
         Initialize the hash table with a fixed size.
 
@@ -110,8 +110,6 @@ class HashTable:
             str: A formatted string representation of the distance table.
         """
         result = "\nHash Table:\n"
-
-        result += "\nPackages:\n"
         for i, slot in enumerate(self.table):
             if slot:
                 formatted_entries = []
